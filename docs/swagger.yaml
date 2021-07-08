@@ -1,0 +1,189 @@
+definitions:
+  gin.Context:
+    properties:
+      accepted:
+        items:
+          type: string
+        type: array
+      errors:
+        type: errorMsgs
+      keys:
+        additionalProperties: true
+        type: object
+      params:
+        type: Params
+      request:
+        type: string
+      writer:
+        type: ResponseWriter
+    type: object
+  web.AddNftParam:
+    properties:
+      cid:
+        type: string
+      owner:
+        type: string
+      token_id:
+        type: string
+    required:
+    - cid
+    - owner
+    - token_id
+    type: object
+  web.DownloadParam:
+    properties:
+      cid:
+        type: string
+    type: object
+  web.GenerateParam:
+    properties:
+      quantity:
+        type: integer
+    type: object
+  web.SearchParm:
+    properties:
+      key:
+        type: string
+      page:
+        type: integer
+      page_size:
+        type: integer
+      typa:
+        type: integer
+    required:
+    - page
+    - page_size
+    - typa
+    type: object
+info:
+  contact:
+    email: U!
+    name: API Support
+    url: Fuck!
+  description: Revolution service API
+  license: {}
+  termsOfService: http://github.com
+  title: Revolution service API
+  version: "1.0"
+paths:
+  /clean-all-user:
+    post:
+      description: 清除测试账户
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: 清除测试账户
+      tags:
+      - Test Base
+  /file/download:
+    post:
+      consumes:
+      - application/json
+      description: 通过cid下载文件
+      parameters:
+      - description: cid
+        in: body
+        name: param
+        required: true
+        schema:
+          $ref: '#/definitions/web.DownloadParam'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/gin.Context'
+      summary: 下载文件
+      tags:
+      - NFT
+  /file/up-to-ipfs:
+    post:
+      consumes:
+      - multipart/form-data
+      description: 上传文件到ipfs 返回cid
+      parameters:
+      - description: file
+        in: formData
+        name: file
+        required: true
+        type: file
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: 上传文件到ipfs
+      tags:
+      - NFT
+  /generate:
+    post:
+      consumes:
+      - application/json
+      description: 生成测试账户
+      parameters:
+      - description: 生成地址数量
+        in: body
+        name: quantity
+        required: true
+        schema:
+          $ref: '#/definitions/web.GenerateParam'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: 生成测试账户
+      tags:
+      - Test Base
+  /nft/add:
+    post:
+      consumes:
+      - application/json
+      description: 存入nft信息
+      parameters:
+      - description: add nft
+        in: body
+        name: param
+        required: true
+        schema:
+          $ref: '#/definitions/web.AddNftParam'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: 存入nft信息
+      tags:
+      - NFT
+  /nft/search:
+    post:
+      consumes:
+      - application/json
+      description: "获取nft信息  typa\t1 查询所有的nft   2 所有在售的nft   3所有在游戏中的  4根据key查询自己的nft"
+      parameters:
+      - description: nft id
+        in: body
+        name: param
+        required: true
+        schema:
+          $ref: '#/definitions/web.SearchParm'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: 获取nft信息
+      tags:
+      - NFT
+swagger: "2.0"

@@ -1,0 +1,17 @@
+
+1. 安装宝塔
+https://www.bt.cn/
+
+2 安装go
+https://golang.google.cn/dl/
+
+3. https://nodejs.org/en/download/
+
+4. 安装docker
+	curl -fsSL https://get.docker.com | bash -s docker --mirror aliyun
+docker-compose
+	sudo curl -L "https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose	
+	sudo chmod +x /usr/local/bin/docker-compose
+	ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
+4. showdoc 安装 https://www.showdoc.com.cn/help?page_id=828455960655160
+	https://www.showdoc.com.cn/runapi?page_id=30291
